@@ -28,6 +28,10 @@
 *.so.*
 *.dylib
 
+# platform and dev specifics
+**/.DS_Store
+**/.vscode/
+
 # Executables
 *.exe
 *.out
