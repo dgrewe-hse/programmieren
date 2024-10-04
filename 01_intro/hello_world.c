@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * File: formatter.c
+ * File: hello_world.c
  * Description: Beispiel für ein Hallo Welt Programm in C.
  * Author: Dennis Grewe
  * Date: September 23rd, 2024
