@@ -1,15 +1,20 @@
 # Vorlesung Programmieren in C an der Hochschule Esslingen (IT1-PRG)
 
-Dieses Programmcode Repository beinhaltet Programmbeispiele im Rahmen der Vorlesung "Programmieren" (IT1-PRG) an der Hochschule Esslingen.
-Bitte beachten Sie folgende Ausschlussklausel:
+    Disclaimer: This repository contains example code as part of the Programming module (IT1-PRG) 
+    at Esslingen University of Applied Sciences. All contents are for educational purposes only. 
+    I do not intend for the content to be a substitute for professional usage and do not provide
+    any guarantee for completness of the code.
 
-    Ausschlussklausel: Alle Inhalte dienen ausschließlich Bildungszwecken. Der Inhalt ist nicht für die professionelle Nutzung gedacht.
+The following documentation is only available in German.
 
-[English Version]
+Dieses Programmcode Repository beinhaltet Programmbeispiele im Rahmen der Vorlesung "Programmieren" 
+(IT1-PRG) an der Hochschule Esslingen. Bitte beachten Sie folgende Ausschlussklausel:
 
-This repository contains example code as part of the Programming module (IT1-PRG) at Esslingen University of Applied Sciences.
+    Ausschlussklausel: Alle Inhalte dienen ausschließlich Bildungszwecken. 
+    Der Inhalt ist nicht für die professionelle Nutzung gedacht und gibt keine
+    Garantie auf Vollständigkeit oder Lauffähigkeit.
 
-    Disclaimer: All content is for educational purposes only. I do not intend for the content to be a substitute for professional usage.
+
 
 ## Vorbedingungen
 
