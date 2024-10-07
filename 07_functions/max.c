@@ -41,11 +41,13 @@
 int max(int number1, int number2) {
     int result;
 
+    // Vergleich auf größere Zahl
     if (number1 > number2)
         result = number1;
     else
         result = number2;
     
+    // Rückgabe des Ergebnis an aufrufende Funktion
     return result;
 }
 
