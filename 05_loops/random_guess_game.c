@@ -34,7 +34,7 @@ int main() {
 
     // Initialisierung des Zufallszahlengenerators
     srand(time(0));
-    // Aufruf von rand() liefert eine Zahl zwischen 0.0 - 1.0 
+    // Aufruf von rand() liefert eine Zahl zwischen [0, RAND_MAX], wobei RAND_MAX = 32767; 
     // mittels Modulo-Operator wird nun eine Zahl zwischen 0 - 100 
     // zurück gegeben und an Variable "randomNumber" mittels "=" zugewiesen
     randomNumber = rand() % 101;  
