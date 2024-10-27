@@ -64,7 +64,7 @@ int main() {
     // von max-Funktion und Übergabe der Variablen zur Bestimmung
     int highest_value = max(i, j);
 
-    printf("Die größere der beiden Zahlen lautet: %d", highest_value);
+    printf("Die größere der beiden Zahlen lautet: %d\n", highest_value);
 
     return 0;
 }
