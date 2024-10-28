@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * File: max.c
+ * File: calendar.c
  * Description: Integrationsbeispiel einer Kalendar-Anwendung, welche den aktuellen
  *              Monat auf der Konsole ausgibt.
  * Author: Dennis Grewe
