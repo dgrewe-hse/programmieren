@@ -30,7 +30,7 @@ typedef struct Node {
 } Node;
 
 // Funktion zum Erstellen eines neuen Knotens
-Node* createNode(int data) {
+Node* create_node(int data) {
     // Speicher für den neuen Knoten reservieren
     Node* newNode = (Node*)malloc(sizeof(Node));
     // Datenfeld setzen
@@ -46,7 +46,7 @@ Node* createNode(int data) {
 // Funktion zum Einfügen eines neuen Knotens am Anfang der Liste
 Node* insert_at_beginning(Node** head, int data) { 
     // Neuen Knoten erstellen
-    Node* newNode = createNode(data);
+    Node* newNode = create_node(data);
     // Zeiger auf den nächsten Knoten setzen
     newNode->next = *head;
     // Zeiger auf den vorherigen Knoten setzen
@@ -60,7 +60,7 @@ Node* insert_at_beginning(Node** head, int data) {
 // Funktion zum Einfügen eines neuen Knotens am Ende der Liste
 Node* insert_at_end(Node** tail, int data) {
     // Neuen Knoten erstellen
-    Node* newNode = createNode(data);
+    Node* newNode = create_node(data);
     // Zeiger auf den vorherigen Knoten setzen
     newNode->prev = *tail;
     // Zeiger auf den nächsten Knoten setzen
@@ -101,6 +101,24 @@ void print_double_linked_list_from_tail(Node* tail) {
     printf("NULL\n");
 }
 
+// Funktion zum Freigeben der Liste
+void free_list(Node* head) {
+    // Zeiger auf den Anfang der Liste setzen
+    Node* current = head;
+    // Zeiger auf den nächsten Knoten setzen
+    Node* next;
+    // Solange der Zeiger nicht NULL ist, durchlaufen wir die Liste
+    // Zeiger ist dann NULL, wenn wir am Ende der Liste angekommen sind
+    while (current != NULL) {
+        // Zeiger auf den nächsten Knoten setzen
+        next = current->next;
+        // Speicher freigeben
+        free(current);
+        // Zeiger auf den nächsten Knoten setzen
+        current = next;
+    }
+}
+
 /**
  * Hauptprogramm zur Demonstration der doppelt verketteten Liste
  */
@@ -119,6 +137,9 @@ int main() {
 
     // Ausgabe der Liste von tail
     print_double_linked_list_from_tail(tail);
+
+    // Freigeben der Liste
+    free_list(head);
 
     return 0;
 }

@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Definition der Knotenstruktur
 struct Node {
     int data;
     struct Node* next;
@@ -83,6 +84,24 @@ void printList(struct Node* head) {
     printf("NULL\n");
 }
 
+// Funktion zum Freigeben der Liste
+void free_list(struct Node* head) {
+    // Zeiger auf den Anfang der Liste setzen
+    struct Node* current = head;
+    // Zeiger auf den nächsten Knoten setzen
+    struct Node* next;
+    // Solange der Zeiger nicht NULL ist, durchlaufen wir die Liste
+    // Zeiger ist dann NULL, wenn wir am Ende der Liste angekommen sind
+    while (current != NULL) {
+        // Zeiger auf den nächsten Knoten setzen
+        next = current->next;
+        // Speicher freigeben
+        free(current);
+        // Zeiger auf den nächsten Knoten setzen
+        current = next;
+    }
+}
+
 /**
  * Hauptfunktion
  * @return: 0
@@ -98,6 +117,10 @@ int main() {
 
     // Liste ausgeben
     printList(head);
+
+    // Freigeben der Liste
+    free_list(head);
+
     return 0;
 }
 

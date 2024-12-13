@@ -30,7 +30,7 @@ typedef struct Node {
 } Node;
 
 // Funktion zum Erstellen eines neuen Knotens
-Node* createNode(int data) {
+Node* create_node(int data) {
     // Speicher für den neuen Knoten reservieren
     Node* newNode = (Node*)malloc(sizeof(Node));
     // Datenfeld setzen
@@ -42,9 +42,9 @@ Node* createNode(int data) {
 }
 
 // Funktion zum Einfügen eines neuen Knotens am Anfang der Liste
-void insertAtBeginning(Node** head, int data) { 
+void insert_at_beginning(Node** head, int data) { 
     // Neuen Knoten erstellen
-    Node* newNode = createNode(data);
+    Node* newNode = create_node(data);
     // Zeiger auf den nächsten Knoten setzen
     newNode->next = *head;
     // Zeiger auf den neuen Knoten setzen
@@ -52,7 +52,7 @@ void insertAtBeginning(Node** head, int data) {
 }
 
 // Funktion zum Ausgeben der Liste
-void printList(Node* head) {
+void display(Node* head) {
     // Zeiger auf den Anfang der Liste setzen
     Node* current = head;
     // Solange der Zeiger nicht NULL ist, durchlaufen wir die Liste
@@ -90,6 +90,24 @@ Node* search_linked_list(Node* head, int value) {
     return NULL;
 }
 
+// Funktion zum Freigeben der Liste
+void free_list(Node* head) {
+    // Zeiger auf den Anfang der Liste setzen
+    Node* current = head;
+    // Zeiger auf den nächsten Knoten setzen
+    Node* next;
+    // Solange der Zeiger nicht NULL ist, durchlaufen wir die Liste
+    // Zeiger ist dann NULL, wenn wir am Ende der Liste angekommen sind
+    while (current != NULL) {
+        // Zeiger auf den nächsten Knoten setzen
+        next = current->next;
+        // Speicher freigeben
+        free(current);
+        // Zeiger auf den nächsten Knoten setzen
+        current = next;
+    }
+}
+
 /**
  * Hauptprogramm zur Demonstration der einfachen verketteten Liste
  */
@@ -98,9 +116,9 @@ int main() {
     Node* head = NULL;  // head zeigt auf den Anfang der Liste, ist NULL, wenn die Liste leer ist
 
     // Einfügen von Knoten am Anfang der Liste
-    insertAtBeginning(&head, 10);   // übergabe der Adresse von head und des Wertes 10
-    insertAtBeginning(&head, 20);   // übergabe der Adresse von head und des Wertes 20
-    insertAtBeginning(&head, 30);   // übergabe der Adresse von head und des Wertes 30
+    insert_at_beginning(&head, 10);   // übergabe der Adresse von head und des Wertes 10
+    insert_at_beginning(&head, 20);   // übergabe der Adresse von head und des Wertes 20
+    insert_at_beginning(&head, 30);   // übergabe der Adresse von head und des Wertes 30
 
     // Suche nach einem bestimmten Wert in der Liste
     // hier nach dem Wert 20 suchen, sollte den 2. Knoten zurückgeben
@@ -113,7 +131,10 @@ int main() {
     }
 
     // Ausgabe der Liste
-    printList(head);
+    display(head);
+
+    // Freigeben der Liste
+    free_list(head);
 
     return 0;
 }

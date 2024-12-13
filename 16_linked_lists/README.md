@@ -28,6 +28,13 @@ Eine Implementierung einer doppelt verketteten Liste, die Folgendes demonstriert
 - Einfügen und Löschen von Knoten
 - Durchlaufen der Liste in beide Richtungen
 
+### 5. Prioritätswarteschlange (`priority_queue.c`)
+Eine Implementierung einer Prioritätswarteschlange, die Folgendes demonstriert:
+- Erstellen von Knoten mit Priorität
+- Einfügen von Knoten in die Warteschlange
+- Entfernen des Knotens mit der höchsten Priorität
+- Durchlaufen der Warteschlange
+
 ## Kompilierung und Ausführung
 
 ### Voraussetzungen
@@ -41,14 +48,15 @@ Das Projekt enthält ein Makefile mit verschiedenen Befehlen für die Kompilieru
 
 #### Hauptbefehle:
 ```bash
+# Hilfe, sowie alle verfügbaren Befehle anzeigen
+make help
+
 # Alle Programme kompilieren
 make all
 
 # Aufräumen (alle kompilierten Programme löschen)
 make clean
 
-# Hilfe anzeigen
-make help
 ```
 
 #### Programme einzeln kompilieren:
@@ -64,6 +72,9 @@ make rear_list
 
 # Doppelt verkettete Liste
 make double_list
+
+# Prioritätswarteschlange
+make priority_queue
 ```
 
 #### Programme ausführen:
@@ -79,6 +90,9 @@ make run-rear
 
 # Doppelt verkettete Liste ausführen
 make run-double
+
+# Prioritätswarteschlange ausführen
+make run-priority
 
 # Alle Programme nacheinander ausführen
 make run-all
@@ -99,6 +113,9 @@ gcc -Wall -Wextra -g -o rear_list simple_linked_list_rear.c
 
 # Doppelt verkettete Liste
 gcc -Wall -Wextra -g -o double_list double_linked_list.c
+
+# Prioritätswarteschlange
+gcc -Wall -Wextra -g -o priority_queue priority_queue.c
 ```
 
 ## Programmdetails
@@ -133,6 +150,10 @@ typedef struct Node {
 4. **Knoten suchen**
    - Durchläuft Liste um bestimmten Wert zu finden
    - Gibt Knoten mit Wert oder NULL zurück
+
+5. **Knoten entfernen**
+   - Entfernt einen bestimmten Knoten aus der Liste
+   - Gibt den entfernten Knoten zurück
 
 ## Speicherverwaltung
 
