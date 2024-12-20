@@ -25,6 +25,7 @@
 
 #include <stdio.h>
 #include <string.h>
+
 // Struktur für einen Kundendatensatz
 // Datensätze werden in Datei "customer.dat" gespeichert
 typedef struct Customer {
@@ -33,34 +34,29 @@ typedef struct Customer {
     char last_name[50];
 } Customer;
 
-// Funktionen für Dateioperationen
-/**
- * @brief Schreibt einen Kundendatensatz in die Datei "customer.dat"
+// Funktionsprototypen
+/** Schreibt einen Kundendatensatz in die Datei "customer.dat"
  * @param customer Der zu schreibende Kundendatensatz
  */
 void write_customer_to_file(Customer customer);
 
-/**
- * @brief Liest einen Kundendatensatz aus der Datei "customer.dat"
+/** Liest einen Kundendatensatz aus der Datei "customer.dat"
  * @param customer_id Die ID des zu lesenden Kundendatensatzes
- * @return Der gelesene Kundendatensatz
+ * @return Der gelesene Kundendatensatz oder ein leerer Datensatz, wenn nicht gefunden
  */
 Customer read_customer_from_file(int customer_id);
 
-/**
- * @brief Aktualisiert einen Kundendatensatz in der Datei "customer.dat"
+/** Aktualisiert einen Kundendatensatz in der Datei "customer.dat"
  * @param customer Der zu aktualisierende Kundendatensatz
  */
 void update_customer_in_file(Customer customer);
 
-/**
- * @brief Löscht einen Kundendatensatz aus der Datei "customer.dat"
+/** Löscht einen Kundendatensatz aus der Datei "customer.dat"
  * @param customer_id Die ID des zu löschenden Kundendatensatzes
  */
 void delete_customer_from_file(int customer_id);
 
-/**
- * Hauptprogramm
+/** Hauptprogramm
  */
 int main() {
     // Daten für einen Kundendatensatz
@@ -74,7 +70,7 @@ int main() {
     strcpy(customer2.first_name, "Jane");
     strcpy(customer2.last_name, "Doe");
 
-    // Schreiben des Kundendatensatzes in die Datei
+    // Schreiben zweier Kundendatensätze in die Datei
     write_customer_to_file(customer);
     write_customer_to_file(customer2);
 
@@ -94,8 +90,7 @@ int main() {
 }
 
 // Funktionen für Dateioperationen
-/**
- * @brief Schreibt einen Kundendatensatz in die Datei "customer.dat"
+/** Schreibt einen Kundendatensatz in die Datei "customer.dat"
  * @param customer Der zu schreibende Kundendatensatz
  */
 void write_customer_to_file(Customer customer) {
@@ -118,11 +113,12 @@ void write_customer_to_file(Customer customer) {
 /**
  * @brief Liest einen Kundendatensatz aus der Datei "customer.dat"
  * @param customer_id Die ID des zu lesenden Kundendatensatzes
- * @return Der gelesene Kundendatensatz
+ * @return Der gelesene Kundendatensatz oder ein leerer Datensatz, wenn nicht gefunden
  */
 Customer read_customer_from_file(int customer_id) {
     // Deklaration des Kundendatensatzes
-    Customer customer;
+    Customer customer = {0};
+    int found = 0; // Flag, um zu überprüfen, ob der Datensatz gefunden wurde
 
     // Öffnen der Datei im Lese-Modus
     FILE *file = fopen("customer.dat", "r");    // r: read
@@ -130,16 +126,27 @@ Customer read_customer_from_file(int customer_id) {
     // Überprüfen, ob die Datei erfolgreich geöffnet wurde
     if (file == NULL) {
         printf("Fehler beim Öffnen der Datei.\n");
-        return customer;
+        return customer; // Rückgabe eines leeren Datensatzes
     }
 
-    // Lesen des Kundendatensatzes aus der Datei
-    fscanf(file, "%d %s %s", &customer.customer_id, customer.first_name, customer.last_name);
+    // Durchlaufen der Datei, um den gewünschten Kundendatensatz zu finden
+    while (fscanf(file, "%d %s %s", &customer.customer_id, customer.first_name, customer.last_name) != EOF) {
+        if (customer.customer_id == customer_id) {
+            found = 1; // Datensatz gefunden
+            break; // Schleife beenden
+        }
+    }
 
     // Schließen der Datei
     fclose(file);
 
-    // Rückgabe des gelesenen Kundendatensatzes
+    if (!found) {
+        printf("Kundendatensatz mit ID %d nicht gefunden.\n", customer_id);
+        // Rückgabe eines leeren Datensatzes, wenn nicht gefunden
+        customer.customer_id = -1; // Beispiel für einen ungültigen ID-Wert
+    }
+
+    // Rückgabe des gelesenen oder leeren Kundendatensatzes
     return customer;
 }
 
@@ -185,19 +192,32 @@ void update_customer_in_file(Customer customer) {
  * @param customer_id Die ID des zu löschenden Kundendatensatzes
  */
 void delete_customer_from_file(int customer_id) {
-    // Öffnen der Datei im Lese-Modus
-    FILE *file = fopen("customer.dat", "r");
+    // Temporäre Struktur für das Lesen der Datensätze
+    Customer temp;
+    FILE *file = fopen("customer.dat", "r"); // Öffnen der Datei im Lese-Modus
+    FILE *temp_file = fopen("temp.dat", "w"); // Temporäre Datei zum Speichern der verbleibenden Datensätze
 
-    // Überprüfen, ob die Datei erfolgreich geöffnet wurde
-    if (file == NULL) {
+    // Überprüfen, ob die Dateien erfolgreich geöffnet wurden
+    if (file == NULL || temp_file == NULL) {
         printf("Fehler beim Öffnen der Datei.\n");
         return;
     }
 
-    // Lesen des Kundendatensatzes aus der Datei
-    Customer customer;
-    fscanf(file, "%d %s %s", &customer.customer_id, customer.first_name, customer.last_name);
+    // Durchlaufen der Datei, um den Datensatz zu finden und zu löschen
+    while (fscanf(file, "%d %s %s", &temp.customer_id, temp.first_name, temp.last_name) != EOF) {
+        if (temp.customer_id != customer_id) {
+            // Wenn die ID nicht übereinstimmt, in die temporäre Datei schreiben
+            fprintf(temp_file, "%d %s %s\n", temp.customer_id, temp.first_name, temp.last_name);
+        }
+    }
 
-    // Schließen der Datei
+    // Schließen der Dateien
     fclose(file);
+    fclose(temp_file);
+
+    // Löschen der ursprünglichen Datei und Umbenennen der temporären Datei
+    remove("customer.dat");
+    rename("temp.dat", "customer.dat");
+
+    printf("Kundendatensatz mit ID %d erfolgreich gelöscht.\n", customer_id);
 }
