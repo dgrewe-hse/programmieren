@@ -2,11 +2,13 @@
 
 ## Simple Double Linked List
 
-Das Programm zeigt, wie man eine einfache doppelt verkettete Liste implementiert.
+Das Programm `simple_double_linked_list.c` zeigt, wie man eine einfache doppelt verkettete Liste implementiert.
 Das Programm ist so aufgebaut, dass die gesamte Funktionslogik innerhalb der main-Funktion implementiert ist.
 Dies fördert das Verständnis der verketteten Liste und der Pointer-Arithmetik, da man die Funktionsweise der Liste direkt sehen kann,
 ohne dass man zusätzliche Funktionen implementieren muss.
 
+Im Vergleich dazu zeigt die Implementierung `simple_double_linked_list_func.c` eine Implementierung der Funktionalität der doppel verketteten Liste
+mit Hilfe von Funktionen. Diese Implementierung ist strukturierter und einfacher zu warten, durch die Modularisierung der Funktionen.
 ### Funktionen
 
 - Erzeugen einer leeren Liste
