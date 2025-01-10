@@ -9,7 +9,6 @@ SEARCH_LIST = search_list
 REAR_LIST = rear_list
 DOUBLE_LIST = double_list
 PRIORITY_QUEUE = priority_queue
-LIST_MULTI_POINTER = list-multi-pointer
 
 # Quelldateien
 SIMPLE_SRC = simple_linked_list.c
@@ -17,11 +16,10 @@ SEARCH_SRC = search_linked_list.c
 REAR_SRC = simple_linked_list_rear.c
 DOUBLE_SRC = double_linked_list.c
 PRIORITY_SRC = priority_queue.c
-LIST_MULTI_POINTER_SRC = list-multi-pointer.c
 
 # Standardziel
 .PHONY: all
-all: $(SIMPLE_LIST) $(SEARCH_LIST) $(REAR_LIST) $(DOUBLE_LIST) $(PRIORITY_QUEUE) $(LIST_MULTI_POINTER)
+all: $(SIMPLE_LIST) $(SEARCH_LIST) $(REAR_LIST) $(DOUBLE_LIST) $(PRIORITY_QUEUE)
 
 # Kompilierung der einzelnen Programme
 $(SIMPLE_LIST): $(SIMPLE_SRC)
@@ -39,13 +37,10 @@ $(DOUBLE_LIST): $(DOUBLE_SRC)
 $(PRIORITY_QUEUE): $(PRIORITY_SRC)
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-$(LIST_MULTI_POINTER): $(LIST_MULTI_POINTER_SRC)
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
 # Säubern des Projekts
 .PHONY: clean
 clean:
-	rm -f $(SIMPLE_LIST) $(SEARCH_LIST) $(REAR_LIST) $(DOUBLE_LIST) $(PRIORITY_QUEUE) $(LIST_MULTI_POINTER)
+	rm -f $(SIMPLE_LIST) $(SEARCH_LIST) $(REAR_LIST) $(DOUBLE_LIST) $(PRIORITY_QUEUE)
 
 # Ausführen der Programme
 .PHONY: run-simple
@@ -68,13 +63,10 @@ run-double: $(DOUBLE_LIST)
 run-priority: $(PRIORITY_QUEUE)
 	./$(PRIORITY_QUEUE)
 
-.PHONY: run-list-multi-pointer
-run-list-multi-pointer: $(LIST_MULTI_POINTER)
-	./$(LIST_MULTI_POINTER)
 
 # Ausführen aller Programme
 .PHONY: run-all
-run-all: run-simple run-search run-rear run-double run-priority run-list-multi-pointer
+run-all: run-simple run-search run-rear run-double run-priority
 
 # Hilfe-Ziel
 .PHONY: help
@@ -87,5 +79,4 @@ help:
 	@echo "  make run-rear  - Führt rear_list aus"
 	@echo "  make run-double - Führt double_list aus"
 	@echo "  make run-priority - Führt priority_queue aus"
-	@echo "  make run-list-multi-pointer - Führt list-multi-pointer aus"
 	@echo "  make run-all   - Führt alle Programme aus"

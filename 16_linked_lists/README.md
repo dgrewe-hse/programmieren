@@ -2,6 +2,8 @@
 
 Dieser Ordner enthält verschiedene Implementierungen von verketteten Listen in C, die verschiedene Operationen und Anwendungsfälle demonstrieren.
 
+Weiter Beispiele im Umgang mit verketteten Listen finden sich im Ordner `examples` und eine Beschreibung der Beispiele findet sich in der Datei [examples/README.md](./examples/README.md).
+
 ## Programmübersicht
 
 ### 1. Einfache Verkettete Liste (`simple_linked_list.c`)
@@ -34,10 +36,6 @@ Eine Implementierung einer Prioritätswarteschlange, die Folgendes demonstriert:
 - Einfügen von Knoten in die Warteschlange
 - Entfernen des Knotens mit der höchsten Priorität
 - Durchlaufen der Warteschlange
-
-### 6. Mehrfach-Pointer in Verketteten Listen (`list-multi-pointer.c`)
-Eine Implementierung, die zeigt, wie ein doppelter Pointer verwendet wird, um den Original-Pointer einer verketteten Liste zu ändern.
-Eine detaillierte Erklärung findet sich in der Datei [list-multi-pointer.md](./list-multi-pointer.md).
 
 ## Kompilierung und Ausführung
 
@@ -79,9 +77,6 @@ make double_list
 
 # Prioritätswarteschlange
 make priority_queue
-
-# Mehrfach-Pointer in Verketteten Listen
-make list-multi-pointer
 ```
 
 #### Programme ausführen:
@@ -100,9 +95,6 @@ make run-double
 
 # Prioritätswarteschlange ausführen
 make run-priority
-
-# Mehrfach-Pointer in Verketteten Listen ausführen
-make run-list-multi-pointer
 
 # Alle Programme nacheinander ausführen
 make run-all
@@ -126,9 +118,6 @@ gcc -Wall -Wextra -g -o double_list double_linked_list.c
 
 # Prioritätswarteschlange
 gcc -Wall -Wextra -g -o priority_queue priority_queue.c
-
-# Mehrfach-Pointer in Verketteten Listen
-gcc -Wall -Wextra -g -o list-multi-pointer list-multi-pointer.c
 ```
 
 ## Programmdetails

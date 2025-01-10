@@ -1,22 +1,68 @@
-# Mehrfach-Pointer in verketteten Listen
+# Weitere Beispiele für verkettete Listen
 
-Dieses Beispielprogramm demonstriert den Unterschied zwischen einfachen und doppelten Pointern bei der Manipulation von verketteten Listen in C.
+## Simple Double Linked List
 
-## Überblick
+Das Programm zeigt, wie man eine einfache doppelt verkettete Liste implementiert.
+Das Programm ist so aufgebaut, dass die gesamte Funktionslogik innerhalb der main-Funktion implementiert ist.
+Dies fördert das Verständnis der verketteten Liste und der Pointer-Arithmetik, da man die Funktionsweise der Liste direkt sehen kann,
+ohne dass man zusätzliche Funktionen implementieren muss.
+
+### Funktionen
+
+- Erzeugen einer leeren Liste
+- Einfügen von drei Knoten am Anfang der Liste
+- Ausgabe der Liste vorwärts und rückwärts
+- Löschen des mittlersten Knotens
+- Löschen der Liste
+
+### Kompilieren
+
+```bash
+gcc -Wall -Wextra -g -o simple_double_linked_list simple_double_linked_list.c
+```
+
+### Ausführen und erwartete Ausgabe
+
+```bash
+./simple_double_linked_list
+Erster Knoten erstellt: 10
+Zweiter Knoten erstellt: 20
+Dritter Knoten erstellt: 30
+
+Liste vorwärts:
+10 -> 20 -> 30 -> NULL
+
+Liste rückwärts:
+30 -> 20 -> 10 -> NULL
+
+Lösche mittleren Knoten (20)
+
+Liste nach dem Löschen:
+10 -> 30 -> NULL
+
+Gebe Speicher frei...
+Programm beendet
+```
+
+## Mehrfach-Pointer in verketteten Listen
+
+Das Beispielprogramm `list-multi-pointer.c` demonstriert den Unterschied zwischen einfachen und doppelten Pointern bei der Manipulation von verketteten Listen in C.
+
+### Überblick
 
 Das Programm zeigt, warum bei bestimmten Listenoperationen (wie dem Löschen des ersten Elements) ein doppelter Pointer notwendig ist und warum ein einfacher Pointer nicht ausreicht.
 
-## Technische Details
+### Technische Details
 
-### Call by Value in C
+#### Call by Value in C
 C arbeitet grundsätzlich immer mit "Call by Value". Das bedeutet:
 - Bei Funktionsaufrufen werden Werte kopiert
 - Auch bei Pointern wird der Wert (die Adresse) kopiert
 - Ein doppelter Pointer ermöglicht den Zugriff auf den Original-Pointer
 
-### Funktionsweise der Beispiele
+#### Funktionsweise der Beispiele
 
-#### 1. Einfacher Pointer (funktioniert nicht korrekt)
+##### 1. Einfacher Pointer (funktioniert nicht korrekt)
 
 ```c
 void delete_first_simple(Node head) {
@@ -32,7 +78,7 @@ void delete_first_simple(Node head) {
 - Änderungen am Pointer sind nur innerhalb der Funktion sichtbar
 - Der Original-Pointer im Hauptprogramm bleibt unverändert
 
-#### 2. Doppel-Pointer (funktioniert korrekt)
+##### 2. Doppel-Pointer (funktioniert korrekt)
 
 ```c
 void delete_first_double(Node** head) {
@@ -46,9 +92,9 @@ void delete_first_double(Node** head) {
 - Durch Dereferenzierung kann der Original-Pointer modifiziert werden
 - Änderungen am Pointer sind auch außerhalb der Funktion sichtbar
 
-## Speichermodell
+### Speichermodell
 
-### Mit einfachem Pointer:
+#### Mit einfachem Pointer:
 
 ```bash
 main(): head -----> [1]->[2]->[3]->NULL
@@ -65,11 +111,11 @@ Resultat: head zeigt auf den neuen Knoten!
 ```
 
 
-## Analogie
+### Analogie
 - Einfacher Pointer: Wie eine Kopie einer Wegbeschreibung - Änderungen an der Kopie ändern nicht die Original-Wegbeschreibung
 - Doppelpointer: Wie ein Zugriff auf die Original-Wegbeschreibung - Änderungen wirken sich direkt auf das Original aus
 
-## Verwendung des Programms
+### Verwendung des Programms
 
 1. Kompilieren:
 
@@ -82,12 +128,13 @@ gcc list-multi-pointer.c -o list-multi-pointer
 ```bash
 ./list-multi-pointer
 ```
-## Ausgabe
+
+### Ausgabe
 Das Programm zeigt die Adressen des head-Pointers vor und nach den Löschoperationen:
 - Bei `delete_first_simple`: Adresse bleibt gleich (fehlerhaft)
 - Bei `delete_first_double`: Adresse wird korrekt aktualisiert
 
-## Wichtige Hinweise
+### Wichtige Hinweise
 1. Immer Doppelpointer verwenden, wenn der Original-Pointer geändert werden soll
 2. Besonders wichtig bei:
    - Löschen des ersten Elements
@@ -95,5 +142,5 @@ Das Programm zeigt die Adressen des head-Pointers vor und nach den Löschoperati
    - Operationen, die den Start der Liste ändern
 3. Speicherlecks vermeiden durch korrektes Freigeben des Speichers
 
-## Fazit
+### Fazit
 Obwohl C nur Call by Value unterstützt, ermöglichen Doppelpointer die Modifikation von Original-Pointern, was besonders bei der Arbeit mit verketteten Listen wichtig ist.
