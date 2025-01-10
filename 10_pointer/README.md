@@ -103,7 +103,7 @@ int main() {
 
 ## 5. Multi-Pointer (`multi-pointer.c`)
 
-In diesem Programm wird gezeigt, wie man einen Pointer auf einen anderen Pointer verwendet.
+In diesem Programm wird gezeigt, wie man generell einen Pointer auf einen anderen Pointer verwendet.
 
 ### Code:
 ```c
@@ -122,6 +122,27 @@ int main() {
     return 0;
 }
 ```
+
+## 6. Multi-Pointer Erweitert (`multi-pointer-ext.c`)
+
+In diesem Programm wird genauer auf die Thematik eines Mehrfachpointers eingegangen, vorallem, wenn diese als Übergabeparameter an Funktionen genutzt werden. Das Beispiel zeigt den Unterschied auf, wann und wie ein einfach oder ein Mehrfachpointer an eine Funktion übergeben wird.
+
+### Wann verwendet man einfache Pointer?
+* Wenn man nur Werte lesen oder ändern möchte
+* Bei Arrays
+* Bei String-Operationen
+* Wenn man nur eine Referenz auf Daten benötigt
+
+### Wann verwendet man doppelte Pointer?
+* Bei dynamischer Speicherverwaltung
+* Wenn der Pointer selbst geändert werden soll
+* Bei verketteten Listen (z.B. Einfügen/Löschen von Nodes)
+* Bei mehrdimensionalen Arrays
+* Wenn Funktionen Pointer-Parameter ändern sollen
+
+### Code:
+
+Der Programmcode ist in folgender Datei beschrieben: [multi-pointer-ext.c](./multi-pointer-ext.c).
 
 ## Kompilierung und Ausführung
 
@@ -142,6 +163,7 @@ gcc -o pointer_zuweisung pointer_zuweisung.c
 gcc -o syntactical_sugar_pointer syntactical_sugar_pointer.c
 gcc -o pointer_increment_decrement pointer_increment_decrement.c
 gcc -o multi_pointer multi-pointer.c
+gcc -o multi_pointer_ext multi-pointer-ext.c
 ```
 
 ### Ausführung
