@@ -43,14 +43,16 @@ int main() {
     // Deklaration der benötigten Variablen "year" und "month"
     int year, month;
 
-    // Benutzer um Jahr und Monat bitten
-    printf("Bitte geben Sie eine Jahreszahl an (z.B.: 2001): ");
-    scanf("%d", &year);
-    printf("Bitte geben Sie eine Zahl für den Monat zwischen 1 und 12 an: ");
-    scanf("%d", &month);
+    do {
+        // Benutzer um Jahr und Monat bitten
+        printf("Bitte geben Sie eine Jahreszahl an (z.B.: 2001): ");
+        scanf("%d", &year);
+        printf("Bitte geben Sie eine Zahl für den Monat zwischen 1 und 12 an (0==Ende): ");
+        scanf("%d", &month);
     
-    // Ausgabe des Kalenders auf der Konsole
-    printCalendar(month, year);
+        // Ausgabe des Kalenders auf der Konsole
+        printCalendar(month, year);
+    } while (month != 0);
 
     return 0;
 }
