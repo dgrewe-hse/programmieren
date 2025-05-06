@@ -1,51 +1,63 @@
-# Compiler settings
-CC = gcc
-CFLAGS = -Wall -Wextra -g
+# -------------------------------------------------------------------
+# Makefile für das Kalender-Projekt
+# Verzeichnisstruktur:
+#  - app.c
+#  - src/calendar_impl.c
+#  - include/calendar.h
+# -------------------------------------------------------------------
 
-# Project name
-TARGET = calendar
+# 1. Compiler und Compiler-Flags
+CC      = gcc
+CFLAGS  = -Wall -Wextra -g -I$(INCDIR)
+#   -Wall, -Wextra: alle Warnungen aktivieren
+#   -g            : Debug-Symbole einbinden
+#   -I$(INCDIR)   : Suchpfad für Header-Dateien
 
-# Current file structure
-SRC = calendar.c
-OBJ = $(SRC:.c=.o)
+# 2. Verzeichnisse
+SRCDIR  = src
+INCDIR  = include
 
-# Directory structure (for future use)
-# SRCDIR = src
-# INCDIR = include
-# OBJDIR = obj
+# 3. Quelldateien
+SRCS    = app.c $(SRCDIR)/calendar_impl.c
 
-# Future file structure (uncomment when refactoring)
-# SRC = $(wildcard $(SRCDIR)/*.c)
-# OBJ = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
-# INCLUDES = -I$(INCDIR)
+# 4. Objektdateien (wandelt alle .c in .o um)
+OBJS    = $(SRCS:.c=.o)
 
-# Default target
+# 5. Name der ausführbaren Datei
+TARGET  = calendar
+
+# -------------------------------------
+# 6. Default-Target: "make" oder "make all"
+# -------------------------------------
 all: $(TARGET)
 
-# Current build rule
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+# -------------------------------------
+# 7. Link-Regel
+#    Verknüpft alle Objektdateien zu einer Executable
+# -------------------------------------
+$(TARGET): $(OBJS)
+	$(CC) $(OBJS) -o $(TARGET)
 
+# -------------------------------------
+# 8. Kompilier-Regel (Pattern Rule)
+#    Wandelt jede .c-Datei in eine .o-Datei um
+#    $<  = Name der Quell-Datei (z.B. app.c)
+#    -o  = Ausgabedatei (z.B. app.o)
+# -------------------------------------
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Future build rules (uncomment when refactoring)
-# $(TARGET): $(OBJ)
-#	@mkdir -p $(@D)
-#	$(CC) $(OBJ) -o $(TARGET)
-
-# $(OBJDIR)/%.o: $(SRCDIR)/%.c
-#	@mkdir -p $(@D)
-#	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-# Clean rule
+# -------------------------------------
+# 9. Aufräum-Target "clean"
+#    Entfernt alle durch Make erzeugten Dateien
+# -------------------------------------
 clean:
-	rm -f $(TARGET) *.o
-	# Future clean additions (uncomment when refactoring)
-	# rm -rf $(OBJDIR)/*
+	rm -f $(OBJS) $(TARGET)
 
-# Phony targets
+# -------------------------------------
+# 10. Phony-Ziele
+# -------------------------------------
 .PHONY: all clean
-
-# Future directory creation (uncomment when refactoring)
-# $(shell mkdir -p $(OBJDIR))
+#   Ein Phony-Ziel ist KEIN Dateiname, sondern ein reiner Platzhalter.
+#   Make führt Phony-Ziele immer aus, auch wenn eine Datei mit demselben
+#   Namen existiert. So verhindert man Verwechslungen mit echten Dateien.
