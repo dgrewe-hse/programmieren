@@ -57,12 +57,12 @@ void delete_first_simple(Node* head) {
 // Durch den doppelten Pointer wird der Original-Pointer aktualisiert,
 // da wir die Adresse des "head"-Pointers übergeben (via Dereferenzierung) und somit den Pointer selbst ändern können.
 // Daher wird der Pointer "head" korrekt aktualisiert und zeigt auf den neuen Knoten.
-void delete_first_double(Node** head) {
-    if (*head == NULL) return;
+void delete_first_double(Node** listenkopf) {
+    if (*listenkopf == NULL) return;
     
-    Node* temp = (*head)->next;  // Speichere zweiten Knoten
-    free(*head);                // Lösche ersten Knoten
-    *head = temp;              // Ändert den Original-Pointer
+    Node* temp = (*listenkopf)->next;  // Speichere zweiten Knoten
+    free(*listenkopf);                // Lösche ersten Knoten
+    *listenkopf = temp;              // Ändert den Original-Pointer
 
     // Erklärung:
     // - Die Adresse des Pointers wird übergeben (Call by Reference)

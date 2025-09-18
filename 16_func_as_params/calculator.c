@@ -58,6 +58,16 @@ double divide(double a, double b);
 
 void print_help();
 
+/**
+ * Funktion, die eine Berechnung auf zwei Zahlen mit einer Operation ausführt.
+ * 
+ * @param operation_ptr Zeiger auf die Funktion, die ausgeführt werden soll
+ * @param a Erste Zahl
+ * @param b Zweite Zahl
+ * @return Ergebnis der Operation
+ */
+double calculate(double (*operation_ptr)(double, double), double a, double b);
+
 // ----- Hauptprogramm -----
 int main() {
 
@@ -68,7 +78,7 @@ int main() {
     // Zeiger auf eine Funktion mit dem Name "operation_ptr" die zwei 
     // double-Werte als Parameter entgegennimmt und einen double-Wert zurückliefert
     double (*operation_ptr)(double, double);
-
+    
     // Benutzer begrüßen und Hilfe anzeigen
     print_help();
 
@@ -104,7 +114,7 @@ int main() {
     // Ausgabe der Ergebnis der Operation
     // Hier wird die Funktion, auf die der Zeiger "operation_ptr" zeigt,
     // aufgerufen.
-    printf("Ergebnis: %f\n", operation_ptr(a, b));
+    printf("Ergebnis: %f\n", calculate(operation_ptr, a, b));
 
     return 0;
 }
@@ -134,4 +144,8 @@ double divide(double a, double b) {
         return 0;
     }
     return a / b;
+}
+
+double calculate(double (*operation_ptr)(double, double), double a, double b) {
+    return (*operation_ptr)(a, b);
 }
