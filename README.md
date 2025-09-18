@@ -71,11 +71,10 @@ Das Projekt besteht aus mehreren Unterordnern, welche nach Kapiteln der Vorlesun
 | 12_arrays_and_pointers          | [Arrays und Zeiger](12_arrays_and_pointers/README.md) |
 | 13_recursion                    | [Rekursion](13_recursion/README.md) |
 | 14_data_structures              | [Datenstrukturen](14_data_structures/README.md) |
-| 15_integration_example_03_tournament_table  | [Integration Beispiel 3: Turniertabelle](15_integration_example_03_tournament_table/README.md) |
-| 16_linked_lists                 | [Verkettete Listen](16_linked_lists/README.md) |
-| 17_func_as_params               | [Funktionen als Parameter](17_func_as_params/README.md) |
-| 18_file_operations              | [Dateioperationen](18_file_operations/README.md) |
-| 19_program_args                 | [Programmargumente](19_program_args/README.md) |
+| 15_linked_lists                 | [Verkettete Listen](15_linked_lists/README.md) |
+| 16_func_as_params               | [Funktionen als Parameter](16_func_as_params/README.md) |
+| 17_file_operations              | [Dateioperationen](17_file_operations/README.md) |
+| 18_program_args                 | [Programmargumente](18_program_args/README.md) |
 
 ## Ausführen
 
